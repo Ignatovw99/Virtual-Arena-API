@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet id="28.11.2023-14:50-create_users_primary_key" author="lyuboslav.ignatov">
+        <addPrimaryKey tableName="users" columnNames="id" constraintName="PK_users_id"/>
+    </changeSet>
+
+    <changeSet id="28.11.2023-14:51-add_auto_increment_for_users_primary_key" author="lyuboslav.ignatov">
+        <addAutoIncrement tableName="users" columnName="id" columnDataType="bigint"/>
+    </changeSet>
+
+    <changeSet id="28.11.2023-14:52-add_users_email_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint tableName="users" columnName="email" constraintName="NN_users_email"/>
+    </changeSet>
+
+    <changeSet id="28.11.2023-14:53-add_users_email_unique_constraint" author="lyuboslav.ignatov">
+        <addUniqueConstraint tableName="users" columnNames="email" constraintName="UQ_users_email"/>
+    </changeSet>
+
+    <changeSet id="28.11.2023-15:00-add_users_created_at_default_value" author="lyuboslav.ignatov">
+        <addDefaultValue tableName="users" columnName="created_at" defaultValueDate="CURRENT_TIMESTAMP"/>
+    </changeSet>
+
+</databaseChangeLog>

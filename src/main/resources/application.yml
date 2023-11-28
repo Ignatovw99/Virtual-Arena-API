@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/virtual_arena_db
+    username: virtual_arena_user
+    password: virtual_arena_user
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    change-log: db/changelog/db.changelog-master.xml

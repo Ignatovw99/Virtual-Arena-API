@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet id="28.11.2023-14:30-create_users_table" author="lyuboslav.ignatov">
+        <createTable tableName="users">
+            <column name="id" type="bigint"/>
+            <column name="email" type="varchar"/>
+            <column name="full_name" type="varchar"/>
+            <column name="phone_number" type="varchar"/>
+            <column name="profile_picture_url" type="varchar"/>
+            <column name="bio" type="text"/>
+            <column name="created_at" type="date"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
