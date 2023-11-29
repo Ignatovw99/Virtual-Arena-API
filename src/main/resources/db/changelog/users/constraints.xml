@@ -29,4 +29,12 @@
         <addDefaultValue tableName="users" columnName="created_at" defaultValueDate="CURRENT_TIMESTAMP"/>
     </changeSet>
 
+    <changeSet id="28.11.2023-18:45-add_users_full_name_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint tableName="users" columnName="full_name" constraintName="NN_users_full_name"/>
+    </changeSet>
+
+    <changeSet id="28.11.2023-18:45-add_users_profile_picture_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint tableName="users" columnName="profile_picture" constraintName="NN_users_profile_picture"/>
+    </changeSet>
+
 </databaseChangeLog>

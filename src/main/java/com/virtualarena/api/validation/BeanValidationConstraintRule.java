@@ -9,7 +9,7 @@ import jakarta.validation.Validator;
 import java.util.List;
 import java.util.Set;
 
-import static com.virtualarena.util.constant.Constants.VALIDATION_NOT_POSSIBLE_OBJECT_IS_NULL;
+import static com.virtualarena.api.util.constant.Constants.VALIDATION_NOT_POSSIBLE_OBJECT_IS_NULL;
 import static java.util.Objects.isNull;
 
 public class BeanValidationConstraintRule<T> extends ValidationRule<T> {

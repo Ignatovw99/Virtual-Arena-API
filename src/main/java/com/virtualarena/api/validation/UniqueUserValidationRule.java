@@ -5,7 +5,7 @@ import com.virtualarena.api.exception.ResourceNotFoundException;
 import com.virtualarena.api.service.contract.UserService;
 import com.virtualarena.api.validation.base.ValidationResult;
 import com.virtualarena.api.validation.base.ValidationRule;
-import com.virtualarena.util.constant.UserConstants;
+import com.virtualarena.api.util.constant.UserConstants;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

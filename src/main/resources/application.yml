@@ -13,3 +13,16 @@ spring:
       ddl-auto: validate
   liquibase:
     change-log: db/changelog/db.changelog-master.xml
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-abka0tkf5ulo1yrc.us.auth0.com/
+          jwk-set-uri: https://dev-abka0tkf5ulo1yrc.us.auth0.com/.well-known/jwks.json
+#          audiences:
+
+virtual-arena:
+  auth:
+    access-token:
+      subject: email
