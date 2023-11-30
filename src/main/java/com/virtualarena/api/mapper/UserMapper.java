@@ -15,6 +15,8 @@ import java.util.Objects;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserMapper extends DomainMapper<User, UserEntity, UserApi> {
 
+    @Mapping(target = "profilePicture", source = "picture")
+    @Mapping(target = "fullName", source = "name")
     User toUser(IdTokenClaims idTokenClaims);
 
     @Override

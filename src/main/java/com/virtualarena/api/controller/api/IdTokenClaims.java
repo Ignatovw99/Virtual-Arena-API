@@ -7,7 +7,7 @@ public class IdTokenClaims {
 
     private String email;
 
-    private String fullName;
+    private String name;
 
-    private String profilePicture;
+    private String picture;
 }
