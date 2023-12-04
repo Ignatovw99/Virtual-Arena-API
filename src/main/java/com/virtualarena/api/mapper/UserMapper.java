@@ -22,6 +22,7 @@ public interface UserMapper extends DomainMapper<User, UserEntity, UserApi> {
     UserEntity toEntity(User domain);
 
     @Override
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "profilePicture", ignore = true)
     void update(User userSource, @MappingTarget User userDestination);
