@@ -17,7 +17,10 @@ public class UniqueUserValidationRule extends ValidationRule<User> {
     protected ValidationResult validateRule(User userToValidate) {
         String email = userToValidate.getEmail();
         try {
-            userService.getByEmail(email);
+            User user = userService.getByEmail(email);
+            if (user.equals(userToValidate)) {
+                return ValidationResult.valid();
+            }
         } catch (ResourceNotFoundException exception) {
             return ValidationResult.valid();
         }
