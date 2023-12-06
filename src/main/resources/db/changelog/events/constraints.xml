@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet id="06.12.2023-14:15-create_events_primary_key" author="lyuboslav.ignatov">
+        <addPrimaryKey tableName="events" columnNames="id" constraintName="PK_events_id"/>
+    </changeSet>
+
+    <changeSet id="06.12.2023-14:15-add_auto_increment_for_events_primary_key" author="lyuboslav.ignatov">
+        <addAutoIncrement tableName="events" columnName="id" columnDataType="bigint"/>
+    </changeSet>
+
+    <changeSet id="06.12.2023-14:15-add_events_title_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint tableName="events" columnName="title" constraintName="NN_events_title"/>
+    </changeSet>
+
+    <changeSet id="06.12.2023-14:15-add_events_description_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint tableName="events" columnName="description" constraintName="NN_events_description"/>
+    </changeSet>
+
+    <changeSet id="06.12.2023-14:20-add_events_start_date_time_default_value" author="lyuboslav.ignatov">
+        <addDefaultValue tableName="events" columnName="start_date_time" defaultValueDate="CURRENT_TIMESTAMP"/>
+    </changeSet>
+
+    <changeSet id="06.12.2023-14:20-add_events_category_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint tableName="events" columnName="category" constraintName="NN_events_category"/>
+    </changeSet>
+
+    <changeSet id="06.12.2023-14:25-add_events_organizer_id_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint tableName="events" columnName="organizer_id" constraintName="NN_events_organizer_id"/>
+    </changeSet>
+
+    <changeSet id="06.12.2023-14:25-add_events_organizer_id_foreign_key_to_users" author="lyuboslav.ignatov">
+        <addForeignKeyConstraint baseColumnNames="organizer_id"
+                                 baseTableName="events"
+                                 constraintName="FK_events_organizer_id_users_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+</databaseChangeLog>

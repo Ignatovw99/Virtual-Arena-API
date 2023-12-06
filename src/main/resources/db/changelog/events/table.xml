@@ -9,14 +9,16 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
         http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
 
-    <!--  Tables changelogs  -->
-    <include file="db/changelog/users/table.xml"/>
-    <include file="db/changelog/events/table.xml"/>
-
-    <!--  Indexes changelogs  -->
-
-    <!--  Constraints changelogs  -->
-    <include file="db/changelog/users/constraints.xml"/>
-    <include file="db/changelog/events/constraints.xml"/>
+    <changeSet id="06.12.2023-14:10-create_events_table" author="lyuboslav.ignatov">
+        <createTable tableName="events">
+            <column name="id" type="bigint"/>
+            <column name="title" type="varchar"/>
+            <column name="description" type="text"/>
+            <column name="image_url" type="varchar"/>
+            <column name="start_date_time" type="datetime"/>
+            <column name="category" type="varchar"/>
+            <column name="organizer_id" type="bigint"/>
+        </createTable>
+    </changeSet>
 
 </databaseChangeLog>
