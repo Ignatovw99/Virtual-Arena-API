@@ -20,8 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Objects;
 
-import static com.virtualarena.api.util.constant.UserConstants.EMAIL;
-import static com.virtualarena.api.util.constant.UserConstants.USER_RESOURCE;
+import static com.virtualarena.api.util.constant.UserConstants.*;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +35,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email)
                 .map(userMapper::toDomainFromEntity)
                 .orElseThrow(() -> new ResourceNotFoundException(USER_RESOURCE, EMAIL, email));
+    }
+
+    @Override
+    public User getById(Long id) {
+        return userRepository.findById(id)
+                .map(userMapper::toDomainFromEntity)
+                .orElseThrow(() -> new ResourceNotFoundException(USER_RESOURCE, ID, id));
     }
 
     @Override

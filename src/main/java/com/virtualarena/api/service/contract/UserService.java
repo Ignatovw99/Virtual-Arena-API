@@ -8,6 +8,8 @@ public interface UserService {
 
     User getByEmail(String email);
 
+    User getById(Long id);
+
     User saveUser(User user);
 
     User updateUser(User user, MultipartFile pictureFile, Authentication authentication);

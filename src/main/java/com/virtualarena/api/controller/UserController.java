@@ -15,14 +15,14 @@ import org.springframework.web.multipart.MultipartFile;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/users/profile")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
     private final UserMapper userMapper;
 
-    @GetMapping("/profile")
+    @GetMapping
     public ResponseEntity<UserApi> getUserProfile(Authentication authentication) {
         String userEmail = authentication.getName();
         User user = userService.getByEmail(userEmail);
@@ -31,7 +31,15 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping("/profile")
+    @GetMapping("{id}")
+    public ResponseEntity<UserApi> getUserProfileById(@PathVariable Long id) {
+        User user = userService.getById(id);
+        UserApi userApi = userMapper.toApi(user);
+
+        return ResponseEntity.ok(userApi);
+    }
+
+    @PostMapping
     public ResponseEntity<UserApi> createUserProfile(@RequestBody IdTokenClaims idTokenClaims) {
         User user = userMapper.toUser(idTokenClaims);
         User createdUser = userService.saveUser(user);
@@ -41,7 +49,7 @@ public class UserController {
                 .body(result);
     }
 
-    @PutMapping("/profile")
+    @PutMapping
     public ResponseEntity<UserApi> updateUserProfile(@ModelAttribute UserUpdateApi userUpdateApi,
                                                      @RequestPart(required = false) MultipartFile pictureFile,
                                                      Authentication authentication) {

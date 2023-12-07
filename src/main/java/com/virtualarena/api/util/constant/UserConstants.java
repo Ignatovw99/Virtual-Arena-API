@@ -19,5 +19,7 @@ public final class UserConstants {
 
     public static final String EMAIL_CANNOT_BE_CHANGED = "User email cannot be changed";
 
+    public static final String ID = "id";
+
     public static final String EMAIL = "email";
 }
