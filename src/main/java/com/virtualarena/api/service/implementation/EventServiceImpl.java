@@ -4,6 +4,7 @@ import com.virtualarena.api.domain.Event;
 import com.virtualarena.api.domain.User;
 import com.virtualarena.api.entity.EventEntity;
 import com.virtualarena.api.exception.InvalidResourceStateException;
+import com.virtualarena.api.exception.ResourceNotFoundException;
 import com.virtualarena.api.mapper.EventMapper;
 import com.virtualarena.api.repository.EventRepository;
 import com.virtualarena.api.service.contract.EventService;
@@ -14,7 +15,11 @@ import com.virtualarena.api.validation.base.ValidationResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
+
+import static com.virtualarena.api.util.constant.EventConstants.EVENT_RESOURCE;
+import static com.virtualarena.api.util.constant.EventConstants.ID;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +29,19 @@ public class EventServiceImpl implements EventService {
     private final EventMapper eventMapper;
     private final UserService userService;
     private final FileService fileService;
+
+    @Override
+    public List<Event> getAll() {
+        List<EventEntity> events = eventRepository.findAll();
+        return eventMapper.toDomainFromEntity(events);
+    }
+
+    @Override
+    public Event getById(Long id) {
+        return eventRepository.findById(id)
+                .map(eventMapper::toDomainFromEntity)
+                .orElseThrow(() -> new ResourceNotFoundException(EVENT_RESOURCE, ID, id));
+    }
 
     @Override
     public Event createEvent(Event event, String organizerEmail) {
