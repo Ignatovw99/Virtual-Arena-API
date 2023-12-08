@@ -5,13 +5,19 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
+import java.util.List;
+
 public interface DomainMapper<D, E, A> {
 
     D toDomainFromEntity(E entity);
 
+    List<D> toDomainFromEntity(List<E> entities);
+
     E toEntity(D domain);
 
     A toApi(D domain);
+
+    List<A> toApi(List<D> domainModels);
 
     D toDomainFromApi(A api);
 
