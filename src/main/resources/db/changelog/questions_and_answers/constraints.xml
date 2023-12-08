@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet id="08.12.2023-15:15-create_questions_and_answers_primary_key" author="lyuboslav.ignatov">
+        <addPrimaryKey
+                tableName="questions_and_answers"
+                columnNames="id"
+                constraintName="PK_questions_and_answers_id"
+        />
+    </changeSet>
+
+    <changeSet id="08.12.2023-15:20-add_auto_increment_for_questions_and_answers_primary_key"
+               author="lyuboslav.ignatov">
+        <addAutoIncrement tableName="questions_and_answers" columnName="id" columnDataType="bigint"/>
+    </changeSet>
+
+    <changeSet id="08.12.2023-15:22-add_questions_and_answers_type_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint
+                tableName="questions_and_answers"
+                columnName="type"
+                constraintName="NN_questions_and_answers_type"
+        />
+    </changeSet>
+
+    <changeSet id="08.12.2023-15:23-add_questions_and_answers_type_default_value" author="lyuboslav.ignatov">
+        <addDefaultValue
+                tableName="questions_and_answers"
+                columnName="type"
+                defaultValueComputed="'QUESTION'"
+        />
+    </changeSet>
+
+    <changeSet id="08.12.2023-15:24-add_questions_and_answers_content_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint
+                tableName="questions_and_answers"
+                columnName="content"
+                constraintName="NN_questions_and_answers_content"
+        />
+    </changeSet>
+
+    <changeSet id="08.12.2023-15:25-add_questions_and_answers_timestamp_default_value" author="lyuboslav.ignatov">
+        <addDefaultValue
+                tableName="questions_and_answers"
+                columnName="timestamp"
+                defaultValueDate="CURRENT_TIMESTAMP"
+        />
+    </changeSet>
+
+    <changeSet id="08.12.2023-15:26-add_questions_and_answers_event_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint
+                tableName="questions_and_answers"
+                columnName="event_id"
+                constraintName="NN_questions_and_answers_event_id"
+        />
+    </changeSet>
+
+    <changeSet id="08.12.2023-15:28-add_questions_and_answers_sender_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint
+                tableName="questions_and_answers"
+                columnName="sender_id"
+                constraintName="NN_questions_and_answers_sender_id"
+        />
+    </changeSet>
+
+    <changeSet id="08.12.2023-15:30-add_questions_and_answers_event_id_foreign_key_to_events"
+               author="lyuboslav.ignatov">
+        <addForeignKeyConstraint baseColumnNames="event_id"
+                                 baseTableName="questions_and_answers"
+                                 constraintName="FK_questions_and_answers_event_id_events_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="events"/>
+    </changeSet>
+
+    <changeSet id="08.12.2023-15:31-add_questions_and_answers_sender_id_foreign_key_to_users"
+               author="lyuboslav.ignatov">
+        <addForeignKeyConstraint baseColumnNames="sender_id"
+                                 baseTableName="questions_and_answers"
+                                 constraintName="FK_questions_and_answers_sender_id_users_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+    <changeSet id="08.12.2023-16:50-add_questions_and_answers_foreign_key_for_replies_to_their_questions"
+               author="lyuboslav.ignatov">
+        <addForeignKeyConstraint baseColumnNames="question_id"
+                                 baseTableName="questions_and_answers"
+                                 constraintName="FK_questions_and_answers_replies_question_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="questions_and_answers"/>
+    </changeSet>
+</databaseChangeLog>

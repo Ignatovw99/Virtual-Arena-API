@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet id="08.12.2023-16:15-create_likes_primary_key" author="lyuboslav.ignatov">
+        <addPrimaryKey
+                tableName="likes"
+                columnNames="id"
+                constraintName="PK_likes_id"
+        />
+    </changeSet>
+
+    <changeSet id="08.12.2023-16:20-add_auto_increment_for_likes_primary_key"
+               author="lyuboslav.ignatov">
+        <addAutoIncrement tableName="likes" columnName="id" columnDataType="bigint"/>
+    </changeSet>
+
+    <changeSet id="08.12.2023-16:26-add_likes_user_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint
+                tableName="likes"
+                columnName="user_id"
+                constraintName="NN_likes_user_id"
+        />
+    </changeSet>
+
+    <changeSet id="08.12.2023-16:28-add_likes_question_and_answer_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint
+                tableName="likes"
+                columnName="question_and_answer_id"
+                constraintName="NN_likes_question_and_answer_id"
+        />
+    </changeSet>
+
+    <changeSet id="08.12.2023-16:30-add_likes_foreign_key_to_users" author="lyuboslav.ignatov">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="likes"
+                                 constraintName="FK_likes_user_id_users_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+    <changeSet id="08.12.2023-15:31-add_likes_foreign_key_to_questions_and_answers" author="lyuboslav.ignatov">
+        <addForeignKeyConstraint baseColumnNames="question_and_answer_id"
+                                 baseTableName="likes"
+                                 constraintName="FK_likes_question_and_answer_id_questions_and_answers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="questions_and_answers"/>
+    </changeSet>
+</databaseChangeLog>
