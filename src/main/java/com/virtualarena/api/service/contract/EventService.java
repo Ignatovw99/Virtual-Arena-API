@@ -10,5 +10,5 @@ public interface EventService {
 
     Event getById(Long id);
 
-    Event createEvent(Event event, String organizerEmail);
+    Event createEvent(Event event);
 }

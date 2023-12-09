@@ -44,14 +44,14 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event createEvent(Event event, String organizerEmail) {
+    public Event createEvent(Event event) {
         ValidationResult validationResult = new BeanValidationConstraintRule<>()
                 .validate(event);
         if (validationResult.notValid()) {
             throw new InvalidResourceStateException(validationResult.getMessage());
         }
 
-        User organizer = userService.getByEmail(organizerEmail);
+        User organizer = userService.getAuthenticationUser();
         event.setOrganizerId(organizer.getId());
 
         if (Objects.nonNull(event.getImageFile())) {
