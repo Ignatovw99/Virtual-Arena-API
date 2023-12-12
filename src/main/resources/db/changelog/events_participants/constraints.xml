@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet id="12.12.2023-22:32-create_events_participants_primary_key" author="lyuboslav.ignatov">
+        <addPrimaryKey tableName="events_participants" columnNames="id" constraintName="PK_events_participants_id"/>
+    </changeSet>
+
+    <changeSet id="12.12.2023-22:33-add_auto_increment_for_events_participants_primary_key" author="lyuboslav.ignatov">
+        <addAutoIncrement tableName="events_participants" columnName="id" columnDataType="bigint"/>
+    </changeSet>
+
+    <changeSet id="12.12.2023-22:35-add_events_participants_event_id_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint tableName="events_participants" columnName="event_id"
+                              constraintName="NN_events_participants_event_id"/>
+    </changeSet>
+
+    <changeSet id="12.12.2023-22:36-add_events_participants_event_id_foreign_key_to_events" author="lyuboslav.ignatov">
+        <addForeignKeyConstraint baseColumnNames="event_id"
+                                 baseTableName="events_participants"
+                                 constraintName="FK_events_participants_event_id_events_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="events"/>
+    </changeSet>
+
+    <changeSet id="12.12.2023-22:40-add_events_participants_user_id_notnull_constraint" author="lyuboslav.ignatov">
+        <addNotNullConstraint tableName="events_participants" columnName="user_id"
+                              constraintName="NN_events_participants_user_id"/>
+    </changeSet>
+
+    <changeSet id="12.12.2023-22:41-add_events_participants_user_id_foreign_key_to_users" author="lyuboslav.ignatov">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="events_participants"
+                                 constraintName="FK_events_participants_user_id_users_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+    <changeSet id="12.12.2023-23:55-add_events_participants_unique_constraint" author="lyuboslav.ignatov">
+        <addUniqueConstraint tableName="events_participants" columnNames="user_id,event_id"
+                              constraintName="UQ_events_participants_user_id_event_id"/>
+    </changeSet>
+
+</databaseChangeLog>

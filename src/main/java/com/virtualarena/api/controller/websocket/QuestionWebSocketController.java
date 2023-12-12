@@ -22,7 +22,7 @@ public class QuestionWebSocketController {
 
     @MessageMapping
     public void postQuestion(@DestinationVariable Long eventId,
-                                    @Payload String content) {
+                             @Payload String content) {
         Question question = questionService.createQuestion(eventId, content);
         QuestionApi questionResult = questionMapper.toApi(question);
 
