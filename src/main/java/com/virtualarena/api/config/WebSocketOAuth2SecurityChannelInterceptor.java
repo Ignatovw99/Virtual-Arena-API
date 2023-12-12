@@ -47,6 +47,6 @@ public class WebSocketOAuth2SecurityChannelInterceptor implements ChannelInterce
         if (Objects.isNull(authorization)) {
             return "";
         }
-        return authorization.get(0).split(" ")[1];
+        return authorization.get(0);
     }
 }
