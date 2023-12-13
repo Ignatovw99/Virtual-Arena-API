@@ -12,7 +12,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/events/{eventId}/questions/{questionId}")
+@RequestMapping("/api/events/{eventId}/questions/{questionId}/likes")
 @RequiredArgsConstructor
 public class QuestionLikeController {
 

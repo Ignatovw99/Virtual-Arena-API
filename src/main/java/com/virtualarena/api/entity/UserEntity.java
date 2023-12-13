@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -37,4 +38,8 @@ public class UserEntity {
 
     @Column(nullable = false)
     private LocalDate createdAt;
+
+    @ManyToMany(mappedBy = "participants")
+    private Set<EventEntity> events;
+
 }

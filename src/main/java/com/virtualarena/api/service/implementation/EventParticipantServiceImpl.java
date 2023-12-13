@@ -3,6 +3,7 @@ package com.virtualarena.api.service.implementation;
 import com.virtualarena.api.domain.User;
 import com.virtualarena.api.entity.EventEntity;
 import com.virtualarena.api.entity.UserEntity;
+import com.virtualarena.api.exception.InvalidResourceStateException;
 import com.virtualarena.api.exception.ResourceNotFoundException;
 import com.virtualarena.api.mapper.UserMapper;
 import com.virtualarena.api.repository.EventRepository;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.virtualarena.api.util.constant.EventConstants.EVENT_RESOURCE;
+import static com.virtualarena.api.util.constant.QuestionAndAnswerConstants.USER_IS_PARTICIPATING_IN_EVENT;
 import static com.virtualarena.api.util.constant.UserConstants.USER_RESOURCE;
 
 @Service
@@ -37,10 +39,20 @@ public class EventParticipantServiceImpl implements EventParticipantService {
     }
 
     @Override
+    public Boolean isUserParticipatingInEvent(Long userId, Long eventId) {
+        return userRepository.findByIdAndEventsIdEquals(userId, eventId)
+                .isPresent();
+    }
+
+    @Override
     public User participateInEvent(Long eventId, String userEmail) {
         UserEntity userEntity = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new ResourceNotFoundException(USER_RESOURCE, UserConstants.EMAIL, userEmail));
         EventEntity eventEntity = getEventEntityById(eventId);
+
+        if (isUserParticipatingInEvent(userEntity.getId(), eventId)) {
+            throw new InvalidResourceStateException(USER_IS_PARTICIPATING_IN_EVENT);
+        }
 
         eventEntity.getParticipants()
                 .add(userEntity);

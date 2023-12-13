@@ -8,6 +8,7 @@ import com.virtualarena.api.exception.InvalidResourceStateException;
 import com.virtualarena.api.exception.ResourceNotFoundException;
 import com.virtualarena.api.mapper.QuestionMapper;
 import com.virtualarena.api.repository.QuestionRepository;
+import com.virtualarena.api.service.contract.EventParticipantService;
 import com.virtualarena.api.service.contract.EventService;
 import com.virtualarena.api.service.contract.QuestionService;
 import com.virtualarena.api.service.contract.UserService;
@@ -27,6 +28,7 @@ public class QuestionServiceImpl implements QuestionService {
     private final QuestionMapper questionMapper;
     private final EventService eventService;
     private final UserService userService;
+    private final EventParticipantService eventParticipantService;
 
     @Override
     public Question getQuestionById(Long id) {
@@ -49,11 +51,19 @@ public class QuestionServiceImpl implements QuestionService {
 
         Event event = eventService.getById(eventId);
         User sender = userService.getAuthenticationUser();
+        if (!canCreateQuestion(sender, event)) {
+            throw new InvalidResourceStateException(USER_IS_NOT_PARTICIPATING_IN_EVENT);
+        }
         Question question = questionMapper.initializeQuestion(content, event, sender);
 
         QuestionEntity questionEntity = questionMapper.toEntity(question);
         QuestionEntity savedQuestion = questionRepository.save(questionEntity);
         return questionMapper.toDomainFromEntity(savedQuestion);
+    }
+
+    private boolean canCreateQuestion(User user, Event event) {
+        return eventParticipantService.isUserParticipatingInEvent(user.getId(), event.getId()) ||
+                user.getId().equals(event.getOrganizerId());
     }
 
     private boolean isQuestionContentValid(String content) {
