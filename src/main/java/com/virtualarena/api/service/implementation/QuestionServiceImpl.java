@@ -39,7 +39,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public List<Question> getEventQuestions(Long eventId) {
-        List<QuestionEntity> questionEntities = questionRepository.findAllByEventIdEquals(eventId);
+        List<QuestionEntity> questionEntities = questionRepository.findAllByEventIdEqualsOrderByTimestampDesc(eventId);
         return questionMapper.toDomainFromEntity(questionEntities);
     }
 

@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface QuestionRepository extends JpaRepository<QuestionEntity, Long> {
 
-    List<QuestionEntity> findAllByEventIdEquals(Long eventId);
+    List<QuestionEntity> findAllByEventIdEqualsOrderByTimestampDesc(Long eventId);
 
 }
