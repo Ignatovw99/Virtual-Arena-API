@@ -30,10 +30,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .authorizeHttpRequests(authorizeHttpRequests ->
-                        authorizeHttpRequests.anyRequest().authenticated())
+                .authorizeHttpRequests(authorize ->
+                        authorize.requestMatchers("/websocket/**", "/api/events", "/api/users/profile/**").permitAll()
+                                .anyRequest().authenticated())
                 .oauth2ResourceServer(resourceServer ->
-                    resourceServer.jwt(Customizer.withDefaults()))
+                        resourceServer.jwt(Customizer.withDefaults()))
                 .exceptionHandling(exceptionHandling ->
                         exceptionHandling.authenticationEntryPoint(authenticationEntryPoint()))
                 .build();

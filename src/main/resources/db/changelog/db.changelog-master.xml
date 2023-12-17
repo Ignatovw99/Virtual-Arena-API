@@ -12,11 +12,17 @@
     <!--  Tables changelogs  -->
     <include file="db/changelog/users/table.xml"/>
     <include file="db/changelog/events/table.xml"/>
+    <include file="db/changelog/questions_and_answers/table.xml"/>
+    <include file="db/changelog/likes/table.xml"/>
+    <include file="db/changelog/events_participants/table.xml"/>
 
     <!--  Indexes changelogs  -->
 
     <!--  Constraints changelogs  -->
     <include file="db/changelog/users/constraints.xml"/>
     <include file="db/changelog/events/constraints.xml"/>
+    <include file="db/changelog/questions_and_answers/constraints.xml"/>
+    <include file="db/changelog/likes/constraints.xml"/>
+    <include file="db/changelog/events_participants/constraints.xml"/>
 
 </databaseChangeLog>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <changeSet id="08.12.2023-15:05-create_questions_and_answers_table" author="lyuboslav.ignatov">
+        <createTable tableName="questions_and_answers">
+            <column name="id" type="bigint"/>
+            <column name="type" type="varchar"/>
+            <column name="content" type="varchar"/>
+            <column name="timestamp" type="datetime"/>
+            <column name="event_id" type="bigint"/>
+            <column name="sender_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="08.12.2023-16:50-add_question_id_column" author="lyuboslav.ignatov">
+        <addColumn tableName="questions_and_answers">
+            <column name="question_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

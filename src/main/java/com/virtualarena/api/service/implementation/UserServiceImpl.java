@@ -14,7 +14,9 @@ import com.virtualarena.api.validation.UpdateUserValidationRule;
 import com.virtualarena.api.validation.base.ValidationResult;
 import com.virtualarena.api.validation.base.ValidationRule;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,6 +31,16 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final FileService fileService;
+
+    @Override
+    public User getAuthenticationUser() {
+        Authentication authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+        if (Objects.isNull(authentication) || !authentication.isAuthenticated()) {
+            throw new AuthenticationServiceException(UNAUTHORIZED_USER);
+        }
+        return getByEmail(authentication.getName());
+    }
 
     @Override
     public User getByEmail(String email) {

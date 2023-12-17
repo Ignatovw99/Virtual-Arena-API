@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class EventModifyApi {
+public class EventSaveApi {
 
     private String title;
 

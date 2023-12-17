@@ -23,9 +23,8 @@ public class UserController {
     private final UserMapper userMapper;
 
     @GetMapping
-    public ResponseEntity<UserApi> getUserProfile(Authentication authentication) {
-        String userEmail = authentication.getName();
-        User user = userService.getByEmail(userEmail);
+    public ResponseEntity<UserApi> getUserProfile() {
+        User user = userService.getAuthenticationUser();
         UserApi result = userMapper.toApi(user);
 
         return ResponseEntity.ok(result);
