@@ -8,6 +8,8 @@ public interface EventService {
 
     List<Event> getAll();
 
+    List<Event> getAllUserEvents(Long userId);
+
     Event getById(Long id);
 
     Event createEvent(Event event);

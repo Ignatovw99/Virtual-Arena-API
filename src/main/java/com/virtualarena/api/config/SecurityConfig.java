@@ -31,7 +31,7 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(authorize ->
-                        authorize.requestMatchers("/websocket/**").permitAll()
+                        authorize.requestMatchers("/websocket/**", "/api/events", "/api/users/profile/**").permitAll()
                                 .anyRequest().authenticated())
                 .oauth2ResourceServer(resourceServer ->
                         resourceServer.jwt(Customizer.withDefaults()))

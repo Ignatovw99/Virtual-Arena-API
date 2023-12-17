@@ -37,6 +37,12 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public List<Event> getAllUserEvents(Long userId) {
+        List<EventEntity> events = eventRepository.findAllByParticipantsIdEqualsOrOrganizerIdEquals(userId, userId);
+        return eventMapper.toDomainFromEntity(events);
+    }
+
+    @Override
     public Event getById(Long id) {
         return eventRepository.findById(id)
                 .map(eventMapper::toDomainFromEntity)

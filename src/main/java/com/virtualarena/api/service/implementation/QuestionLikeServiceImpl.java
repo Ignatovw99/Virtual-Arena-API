@@ -10,6 +10,7 @@ import com.virtualarena.api.service.contract.QuestionService;
 import com.virtualarena.api.service.contract.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -30,6 +31,7 @@ public class QuestionLikeServiceImpl implements QuestionLikeService {
         return likeService.getLikesByEventPostId(question.getId());
     }
 
+    @Transactional
     @Override
     public Like likeQuestion(Long questionId, Long eventId) {
         User user = userService.getAuthenticationUser();
