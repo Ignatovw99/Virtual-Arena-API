@@ -14,7 +14,7 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOriginPatterns("*")
+                        .allowedOriginPatterns("http://localhost:[*]", "https://virtual-arena-ui-1f5fd4461cdd.herokuapp.com/")
                         .allowedMethods("*")
                         .exposedHeaders("*")
                         .allowedHeaders("*");
