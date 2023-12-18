@@ -32,6 +32,7 @@ server:
     key-store-password: changeit
     key-alias: virtual-arena-key
     enabled: true
+  port: ${POST}
 
 virtual-arena:
   auth:
