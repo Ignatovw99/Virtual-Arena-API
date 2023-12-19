@@ -26,7 +26,7 @@ public class CloudinaryFileServiceImpl implements FileService {
 
     @Override
     public String uploadFile(MultipartFile file) {
-        ValidationResult validationResult = new FileValidationRule(maxFileSize.toBytes(), List.of("image/png"))
+        ValidationResult validationResult = new FileValidationRule(maxFileSize.toBytes(), List.of("image/png", "image/jpeg"))
                 .validate(file);
 
         if (validationResult.notValid()) {
