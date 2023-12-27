@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class QuestionApi {
+public class ReplyApi {
 
     private Long id;
 
@@ -18,4 +18,6 @@ public class QuestionApi {
     private Long senderId;
 
     private Long eventId;
+
+    private Long questionId;
 }

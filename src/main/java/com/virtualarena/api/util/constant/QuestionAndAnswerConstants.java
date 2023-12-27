@@ -16,5 +16,7 @@ public final class QuestionAndAnswerConstants {
 
     public static final String USER_IS_PARTICIPATING_IN_EVENT = "User is participating in this event";
 
+    public static final String REPLY_CONTENT_EMPTY = "The reply's content is empty";
+
     public static final String ID = "id";
 }
